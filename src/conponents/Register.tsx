@@ -16,7 +16,7 @@ export default function Register() {
     
       const handleRegister = async () => {
        
-        axios.post('http://localhost:8000/register', {
+        axios.post('/register', {
             username,
             password,
           }).then(res =>{
