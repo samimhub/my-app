@@ -1,7 +1,5 @@
 import Register from "@/conponents/Register";
 
-
-
 const page = () => {
     return <Register/>
   };

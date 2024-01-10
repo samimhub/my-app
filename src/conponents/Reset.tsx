@@ -7,14 +7,14 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import {useState} from 'react'
 
-export default function Login() {
+export default function Reset() {
   const name ='Login'; 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
 
   const handleLogin = async () => {
-    axios.post('/login', {
+    axios.post('/reset', {
       username,
       password
     }).then(res => {
