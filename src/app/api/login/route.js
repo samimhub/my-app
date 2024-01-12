@@ -11,11 +11,11 @@ const loginHandler=async()=>{
     } = body
     
     if(!username || !password){
-        return NextResponse.status(400).json("incorrect from submission");
+        return NextResponse.json({ error: "incorrect form submission" })
     }
     const user = await User.findOne({username,password})
     if(!user){
-        return NextResponse.status(400).json("wrong credentials")
+        return NextResponse.json({ error: "wrong credentials" })
     }
     NextResponse.json(user)
 }

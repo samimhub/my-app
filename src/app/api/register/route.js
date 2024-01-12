@@ -5,32 +5,35 @@ import {dbConnect} from "@/lib/dbConnect";
  
 const registerHandler=async()=>{
     await dbConnect();
-    const body = await NextRequest.json()
+    try{
+    const body = await NextRequest.json();
     const {
         username,
         password
     } = body
     if(!username || !password) {
-        return NextResponse.status(400).json("incorrect form submission")
+        return NextResponse.json({ message: "incorrect form submission" })
     }
-
     const user = await User.findOne({ username })
     if (user) {
-        return NextResponse.status(400).json("user already exists")
+        return NextResponse.json({message: "User already exists"}) 
     }
 
     const newUser = await User.create({
         username,
         password
     })
-    user.save(); 
+
     return NextResponse.json({
         message:'User registered Successfully',
         user:newUser
     })
+}catch(error){
+    console.error('error processing registration',error)
+    return NextResponse.json({message:'Internal srever error'});
+}
     
 }
-export {
-    registerHandler as GET,
+export { 
     registerHandler as POST
 }
