@@ -6,6 +6,8 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import {useState} from 'react'
+import Image from 'next/image'
+import bg_image2 from '../../public/bg_image2.jpg'
 
 export default function Login() {
   const name ='Login'; 
@@ -14,18 +16,35 @@ export default function Login() {
   const router = useRouter()
 
   const handleLogin = async () => {
-    axios.post('/login', {
+    axios.post('/api/login', {
       username,
       password
     }).then(res => {
-      localStorage.setItem("user", JSON.stringify(res.data));
-      router.push("/dashboard");
+      if(res.data.success){
+        localStorage.setItem("user", JSON.stringify(res.data));
+        router.push("/dashboard");
+      }else{
+        setUsername('');
+        setPassword('');
+        alert("Login failed. Please check your credentials.")
+      }
     }).catch(err => {
       alert(err.response.data);
     })
   }
   return (
     <div className="text-white font-serif h-[100vh] flex justify-center items-center " >
+       <Image
+         alt="bg_img"
+         src={bg_image2}
+         placeholder="blur"
+         quality={100}
+         fill
+         sizes="100vw"
+         style={{
+           objectFit: 'cover',
+         }}
+    />
     <div className='bg-slate-800 border-slate-500 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative'>
      <h1 className='text-4xl text-white font-bold text-center mb-6'>{name}</h1>
       <section>

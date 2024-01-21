@@ -6,6 +6,9 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import {useState} from 'react'
+import Image from 'next/image'
+import bg_image2 from '../../public/bg_image2.jpg'
+
 
 export default function Register() {
   
@@ -16,18 +19,29 @@ export default function Register() {
     
       const handleRegister = async () => {
        
-        axios.post('/register', {
+        axios.post('/api/register', {
             username,
             password,
           }).then(res =>{
             alert(res.data.message)
             router.push('/login')
           }).catch (error=> {
-            alert(error.response.data);
+            alert(error.res.data);
           })
       };
       return (
         <div className="text-white font-serif h-[100vh] flex justify-center items-center " >
+           <Image
+         alt="bg_img"
+         src={bg_image2}
+         placeholder="blur"
+         quality={100}
+         fill
+         sizes="100vw"
+         style={{
+           objectFit: 'cover',
+         }}
+    />
         <div className='bg-slate-800 border-slate-500 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative'>
          <h1 className='text-4xl text-white font-bold text-center mb-6'>{name}</h1>
           <section>
