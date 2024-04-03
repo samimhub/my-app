@@ -2,8 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image'
-import bg_image2 from '../../public/bg_image2.jpg'
+
 
 function Dashboard() {
   const router=useRouter();
